@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Ad": {
+      "title": "Ad",
+      "description": "An advertisement posted by a user",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "images": { "type": "array", "items": { "type": "string" } },
+        "location": { "type": "string" },
+        "description": { "type": "string" },
+        "phone": { "type": "string" },
+        "ownerEmail": { "type": "string" },
+        "ownerId": { "type": "string", "description": "UID of the user who posted the ad" },
+        "ownerName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "category", "ownerId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Collection of user profiles"
+    },
+    "/users/{userId}/cart/{itemId}": {
+      "schema": "Ad",
+      "description": "User shopping cart items"
+    },
+    "/ads/{adId}": {
+      "schema": "Ad",
+      "description": "Collection of advertisements"
+    }
+  }
+}
